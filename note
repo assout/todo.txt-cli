@@ -3,6 +3,7 @@
 TODO_NOTES_DIR=$TODO_DIR/notes
 TODO_NOTE_TAG="note:"
 TODO_NOTE_EXT=${TODO_NOTE_EXT:-.txt}
+TODO_NOTE_IS_OPEN=${TODO_NOTE_IS_OPEN:-1} # 0:no open, 1:open, 2:confirm
 
 usage() {
   echo "    $(basename "$0") ITEM#"
@@ -89,9 +90,14 @@ else
   echo "${item}" "${todo}"
   echo TODO: Note added to task "${item}".
 
-  echo "Edit note?  (y/n)"
-  read ANSWER
-  if [ "$ANSWER" = "y" ] ; then
+  if [ "${TODO_NOTE_IS_OPEN}" = 2 ] ; then
+    echo "Edit note?  (y/n)"
+    read ANSWER
+    if [ "$ANSWER" = "y" ] ; then
+      TODO_NOTE_IS_OPEN=1
+    fi
+  fi
+  if [ "${TODO_NOTE_IS_OPEN}" = 1 ] ; then
     editnote "${notepath}"
   fi
 fi
