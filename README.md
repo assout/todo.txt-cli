@@ -35,6 +35,8 @@ Copy the `note` files in this directory to your add-ons folder.
 You can change the note file extension by adding an entry to your `todo.cfg` file:
 
 ```
-# Note file extension
+# Note file extension (default:.txt)
 export TODO_NOTE_EXT=.md
+# Note file open 0:no open 1:open 2:confirm
+export TODO_NOTE_IS_OPEN=1 (default:1)
 ```
